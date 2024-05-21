@@ -74,6 +74,24 @@ Tambien hay que tener en cuenta que se debe instalar swagger, mas que nada para 
 dotnet add package Swashbuckle.AspNetCore
 ```
 
+### Es necesario tambien poblar la base:
+Aca estan ambos scripts:
+```postgresql
+INSERT INTO "Products" ("ProductCode", "OriginalPrice", "Price", "Title", "Commission", "ShippingCost", "CreatedDate", "IsActive") VALUES
+('MLM001', 5000, 3000, 'Guitar', 500, 149.5, '2023-05-21 00:00:00', TRUE),
+('MLM002', 3000, 1500, 'Chair', 500, 170, '2023-05-21 00:00:00', TRUE),
+('MLM003', 100000, 80000, 'PC', 20000, 5000, '2023-05-21 00:00:00', TRUE),
+('MLM004', 15000, 8000, 'RAM1', 2000, 1000, '2023-05-21 00:00:00', TRUE),
+('MLM005', 500, 100, 'USB', 50, 10, '2023-05-21 00:00:00', TRUE);
+
+INSERT INTO "ProductCosts" ("ProductCode", "IVA", "Cost", "ProductId") VALUES
+('MLM001', 0.16, 500, 1),
+('MLM002', 0.16, 1000, 2),
+('MLM003', 0.21, 70000, 3),
+('MLM004', 0.21, 9000, 4),
+('MLM005', 0.16, 200, 5);
+```
+
 Link a la api:
 https://localhost:5001/swagger
 
