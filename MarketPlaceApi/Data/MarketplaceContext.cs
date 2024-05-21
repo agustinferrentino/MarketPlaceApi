@@ -1,28 +1,22 @@
-using MarketPlaceApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarketPlaceApi.Data;
-public class MarketplaceContext : DbContext
+namespace MarketPlaceApi.Entities
 {
-    public MarketplaceContext(DbContextOptions<MarketplaceContext> options)
-        : base(options)
+    public class MarketplaceContext : DbContext
     {
-    }
+        public MarketplaceContext(DbContextOptions<MarketplaceContext> options) : base(options) { }
 
-    public DbSet<Product> Products { get; set; }
-    public DbSet<ProductCost> ProductCosts { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCost> ProductCosts { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Product>()
-            .HasKey(p => p.Id);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.ProductCost)
+                .WithOne(pc => pc.Product)
+                .HasForeignKey<ProductCost>(pc => pc.ProductId);
 
-        modelBuilder.Entity<ProductCost>()
-            .HasKey(pc => pc.Id);
-
-        modelBuilder.Entity<ProductCost>()
-            .HasOne(pc => pc.Product)
-            .WithMany(p => p.ProductCosts)
-            .HasForeignKey(pc => pc.ProductId);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

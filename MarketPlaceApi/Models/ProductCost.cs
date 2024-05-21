@@ -9,6 +9,5 @@ public class ProductCost
     public decimal IVA { get; set; }
     public decimal Cost { get; set; }
     public int ProductId { get; set; }
-    [JsonIgnore]
     public Product Product { get; set; }
 }
