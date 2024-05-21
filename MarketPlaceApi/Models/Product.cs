@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 namespace MarketPlaceApi.Entities;
 
 public class Product
@@ -11,4 +15,6 @@ public class Product
     public decimal ShippingCost { get; set; }
     public DateTime CreatedDate { get; set; }
     public bool IsActive { get; set; }
+    [JsonIgnore]
+    public ICollection<ProductCost> ProductCosts { get; set; }
 }
